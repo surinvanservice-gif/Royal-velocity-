@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html lang="th"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>จองรถออนไลน์ - บริการจองรถออนไลน์</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(226, 232, 240, 0.5);
+        }
+        .step-active {
+            @apply border-primary text-primary;
+        }
+        input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 40, 142, 0.1);
+        }
+        .scroll-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .pb-safe {
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#b9bcbe",
+                        "on-background": "#131b2e",
+                        "outline-variant": "#c4c5d5",
+                        "tertiary-fixed": "#e0e3e5",
+                        "on-primary-fixed-variant": "#173bab",
+                        "primary-fixed": "#dde1ff",
+                        "on-secondary-fixed": "#0b1c30",
+                        "tertiary-container": "#484c4e",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "surface-container-low": "#f2f3ff",
+                        "on-tertiary-fixed": "#191c1e",
+                        "tertiary": "#323537",
+                        "error": "#ba1a1a",
+                        "background": "#faf8ff",
+                        "on-primary-fixed": "#001453",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "on-primary-container": "#a8b8ff",
+                        "primary-container": "#1e40af",
+                        "primary": "#00288e",
+                        "inverse-primary": "#b8c4ff",
+                        "outline": "#757684",
+                        "surface-container-highest": "#dae2fd",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "secondary": "#505f76",
+                        "on-secondary-container": "#54647a",
+                        "on-surface-variant": "#444653",
+                        "secondary-fixed": "#d3e4fe",
+                        "surface-dim": "#d2d9f4",
+                        "secondary-container": "#d0e1fb",
+                        "primary-fixed-dim": "#b8c4ff",
+                        "surface-variant": "#dae2fd",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "surface-tint": "#3755c3",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#eef0ff",
+                        "inverse-surface": "#283044",
+                        "surface-bright": "#faf8ff",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-surface": "#131b2e",
+                        "surface-container": "#eaedff",
+                        "surface": "#faf8ff",
+                        "surface-container-high": "#e2e7ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "3xl": "64px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "max-width": "1280px",
+                        "2xl": "48px",
+                        "margin-desktop": "auto",
+                        "margin-mobile": "16px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md scroll-smooth min-h-screen">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 bg-surface dark:bg-inverse-surface shadow-sm">
+<div class="flex justify-between items-center px-4 md:px-lg h-16 w-full max-w-max-width mx-auto">
+<div class="text-headline-md font-headline-md font-bold text-primary dark:text-primary-fixed-dim">
+                บริการจองรถออนไลน์
+            </div>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md" href="#">หน้าแรก</a>
+<a class="text-primary font-bold font-label-md" href="#">จองรถ</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md" href="#">การจองของฉัน</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md" href="#">ติดต่อเรา</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-2 rounded-full transition-colors active:scale-95">help</button>
+<button class="material-symbols-outlined text-primary p-2 rounded-full hover:bg-surface-container-high transition-colors active:scale-95">account_circle</button>
+</div>
+</div>
+</header>
+<main class="pt-24 pb-32 px-4 md:px-lg w-full max-w-max-width mx-auto">
+<!-- Booking Progress Header -->
+<div class="mb-8">
+<h1 class="font-headline-lg text-headline-lg-mobile md:text-headline-lg text-on-background mb-2">ยืนยันการจองรถของคุณ</h1>
+<p class="text-secondary font-body-md">กรุณากรอกข้อมูลให้ครบถ้วนเพื่อความสะดวกรวดเร็วในการให้บริการ</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
+<!-- Main Booking Form (Col 1-8) -->
+<div class="lg:col-span-8 space-y-lg">
+<!-- 1. ข้อมูลรถ (Car Selection Display) -->
+<section class="bg-surface-container-lowest rounded-xl overflow-hidden shadow-sm border border-outline-variant/30">
+<div class="grid md:grid-cols-2">
+<div class="relative h-64 md:h-auto overflow-hidden group">
+<img alt="Selected Car Preview" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0bkD7elMchnpCOTmRPRGXXpG9qhNzPCVjtQyFgeSAre1EtKvrlwd2-BtupvxrcamSvgAGPNeTk0sP0wWw6EANhjvbJveEuxinh2hOWDmXirvESWabE5CAMqZq1_fhhWyYHAF1HhxGX5Gbmj6nkqVG7Soanfq9NL7uHG0UX2y6f3RBul3ouwO95ui4BN_mtvv44Q6Q2u797ApV4KOo4_QNSttoiuyn4hA3IG6YSGCsuqAeCBteU-Z0"/>
+</div>
+<div class="p-lg flex flex-col justify-center">
+<div class="flex items-center gap-2 mb-2">
+<span class="bg-primary/10 text-primary px-3 py-1 rounded-full font-label-sm uppercase">Premium Class</span>
+<div class="flex text-yellow-500">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-background mb-4">Luxury Chauffeur SUV</h2>
+<div class="space-y-3">
+<div class="flex items-center gap-3 text-secondary">
+<span class="material-symbols-outlined">person</span>
+<span class="font-body-md">7 ที่นั่ง</span>
+</div>
+<div class="flex items-center gap-3 text-secondary">
+<span class="material-symbols-outlined">luggage</span>
+<span class="font-body-md">4 กระเป๋าขนาดใหญ่</span>
+</div>
+<div class="flex items-center gap-3 text-secondary">
+<span class="material-symbols-outlined">ac_unit</span>
+<span class="font-body-md">ระบบปรับอากาศแยกส่วน</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- 2. ข้อมูลผู้จอง (Personal Information) -->
+<section class="bg-white p-lg rounded-xl shadow-sm border border-outline-variant/30">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">person</span>
+</div>
+<h3 class="font-headline-md text-on-background">ข้อมูลผู้จอง</h3>
+</div>
+<div class="grid md:grid-cols-2 gap-md">
+<div class="space-y-1">
+<label class="font-label-md text-on-surface">ชื่อ-นามสกุล</label>
+<input class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-md" placeholder="ระบุชื่อจริงและนามสกุล" type="text"/>
+</div>
+<div class="space-y-1">
+<label class="font-label-md text-on-surface">เบอร์โทรศัพท์</label>
+<input class="w-full px-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-all font-body-md" placeholder="08x-xxx-xxxx" type="tel"/>
+</div>
+</div>
+</section>
+<!-- 3. ประเภทบริการ & สถานที่ (Service & Locations) -->
+<section class="bg-white p-lg rounded-xl shadow-sm border border-outline-variant/30">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">route</span>
+</div>
+<h3 class="font-headline-md text-on-background">แผนการเดินทาง</h3>
+</div>
+<!-- Service Type Tabs -->
+<div class="flex p-1 bg-surface-container-low rounded-lg mb-6">
+<button class="flex-1 py-2 px-4 rounded-md text-primary font-bold bg-white shadow-sm transition-all">รับ-ส่ง (Point to Point)</button>
+<button class="flex-1 py-2 px-4 rounded-md text-secondary hover:text-primary transition-all">เหมาวัน (Daily Rental)</button>
+</div>
+<!-- Location Pickers with Google Maps Feel -->
+<div class="space-y-md relative">
+<div class="absolute left-6 top-8 bottom-8 w-0.5 bg-outline-variant/50 border-dashed border-l-2"></div>
+<div class="relative pl-12">
+<div class="absolute left-4 top-4 w-4 h-4 rounded-full border-4 border-primary bg-white z-10"></div>
+<label class="font-label-md text-on-surface mb-1 block">จุดรับ (Pick-up Location)</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-12 pr-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="ค้นหาสถานที่, โรงแรม, สนามบิน..." type="text"/>
+</div>
+</div>
+<div class="space-y-md" id="drop-off-container">
+<div class="relative pl-12 group">
+<div class="absolute left-4 top-4 w-4 h-4 rounded-full bg-error border-4 border-white shadow-sm z-10"></div>
+<label class="font-label-md text-on-surface mb-1 block">จุดส่ง (Drop-off Location)</label>
+<div class="relative flex gap-2">
+<div class="relative flex-grow">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">location_on</span>
+<input class="w-full pl-12 pr-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="ระบุจุดหมายปลายทาง" type="text"/>
+</div>
+<button class="p-3 text-secondary hover:text-error transition-colors"><span class="material-symbols-outlined">delete</span></button>
+</div>
+</div>
+</div>
+<div class="pl-12">
+<button class="inline-flex items-center gap-2 text-primary font-label-md hover:bg-primary/5 px-4 py-2 rounded-lg transition-colors" onclick="addStop()">
+<span class="material-symbols-outlined text-sm">add_circle</span>
+                                เพิ่มจุดแวะรับ-ส่ง
+                            </button>
+</div>
+</div>
+</section>
+<!-- 4. วันและเวลา (Date & Time) -->
+<section class="bg-white p-lg rounded-xl shadow-sm border border-outline-variant/30">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">event</span>
+</div>
+<h3 class="font-headline-md text-on-background">วันและเวลาที่นัดหมาย</h3>
+</div>
+<div class="grid md:grid-cols-2 gap-md">
+<div class="space-y-1">
+<label class="font-label-md text-on-surface">วันที่</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">calendar_month</span>
+<input class="w-full pl-12 pr-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-all" type="date"/>
+</div>
+</div>
+<div class="space-y-1">
+<label class="font-label-md text-on-surface">เวลา</label>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">schedule</span>
+<input class="w-full pl-12 pr-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-all" type="time"/>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Price Summary Sidebar (Col 9-12) -->
+<aside class="lg:col-span-4">
+<div class="sticky top-24 space-y-lg">
+<div class="bg-inverse-surface text-surface p-lg rounded-xl shadow-lg border border-white/10">
+<h3 class="font-headline-md mb-6 border-b border-white/20 pb-4">สรุปการจอง</h3>
+<div class="space-y-4 mb-8">
+<div class="flex justify-between text-surface-variant font-body-md">
+<span>ค่าบริการพื้นฐาน</span>
+<span>฿2,500</span>
+</div>
+<div class="flex justify-between text-surface-variant font-body-md">
+<span>ค่าบริการเพิ่มจุดแวะ (1 จุด)</span>
+<span>฿300</span>
+</div>
+<div class="flex justify-between text-surface-variant font-body-md">
+<span>ค่าธรรมเนียมการจอง</span>
+<span>฿0</span>
+</div>
+<div class="pt-4 border-t border-white/20 flex justify-between items-end">
+<div>
+<p class="text-label-md text-surface-variant">ยอดชำระสุทธิ</p>
+<p class="text-headline-lg font-headline-xl text-primary-fixed">฿2,800</p>
+</div>
+<span class="bg-primary-fixed/20 text-primary-fixed px-2 py-1 rounded font-label-sm">VAT Included</span>
+</div>
+</div>
+<div class="space-y-3">
+<button class="w-full bg-primary-fixed text-on-primary-fixed font-bold py-4 rounded-lg text-lg hover:bg-primary-fixed-dim active:scale-95 transition-all shadow-lg flex items-center justify-center gap-2">
+<span class="material-symbols-outlined">check_circle</span>
+                                ยืนยันการจองทันที
+                            </button>
+<p class="text-center text-surface-variant text-label-sm">ยกเลิกฟรี 24 ชม. ก่อนเดินทาง</p>
+</div>
+</div>
+<!-- Map Preview Mockup -->
+<div class="bg-white p-4 rounded-xl shadow-sm border border-outline-variant/30 overflow-hidden">
+<p class="font-label-md text-on-surface mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">map</span>
+                            แผนที่การเดินทางโดยประมาณ
+                        </p>
+<div class="h-48 rounded-lg relative overflow-hidden bg-surface-container">
+<div class="absolute inset-0 opacity-40 grayscale" style="background-image: radial-gradient(#00288e 0.5px, transparent 0.5px); background-size: 10px 10px;"></div>
+<div class="absolute inset-0 flex items-center justify-center">
+<div class="bg-white/80 px-4 py-2 rounded-full border border-primary/20 text-primary font-label-md flex items-center gap-2">
+<span class="material-symbols-outlined">navigation</span>
+                                    คำนวณเส้นทาง...
+                                </div>
+</div>
+<!-- Simulation of map interaction -->
+<div class="absolute top-2 right-2 flex flex-col gap-1">
+<button class="w-8 h-8 bg-white shadow-sm rounded flex items-center justify-center text-secondary hover:text-primary"><span class="material-symbols-outlined text-sm">add</span></button>
+<button class="w-8 h-8 bg-white shadow-sm rounded flex items-center justify-center text-secondary hover:text-primary"><span class="material-symbols-outlined text-sm">remove</span></button>
+</div>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Mobile Bottom Navigation Shell -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full bg-surface dark:bg-inverse-surface shadow-[0_-4px_12px_rgba(15,23,42,0.05)] h-20 px-4 pb-safe flex justify-around items-center z-50 rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-label-sm font-label-sm mt-1">หน้าแรก</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">directions_car</span>
+<span class="text-label-sm font-label-sm mt-1">จองรถ</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined">event_note</span>
+<span class="text-label-sm font-label-sm mt-1">การจอง</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary dark:text-secondary-fixed-dim transition-transform active:scale-90" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="text-label-sm font-label-sm mt-1">ช่วยเหลือ</span>
+</a>
+</nav>
+<script>
+        function addStop() {
+            const container = document.getElementById('drop-off-container');
+            const newStop = document.createElement('div');
+            newStop.className = 'relative pl-12 group animate-in slide-in-from-top-4 duration-300';
+            newStop.innerHTML = `
+                <div class="absolute left-4 top-4 w-4 h-4 rounded-full bg-outline border-4 border-white shadow-sm z-10"></div>
+                <label class="font-label-md text-on-surface mb-1 block">จุดแวะ (Stop Point)</label>
+                <div class="relative flex gap-2">
+                    <div class="relative flex-grow">
+                        <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">add_location</span>
+                        <input type="text" placeholder="ระบุจุดแวะพักหรือสถานที่" class="w-full pl-12 pr-4 py-3 rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary transition-all">
+                    </div>
+                    <button onclick="this.parentElement.parentElement.remove()" class="p-3 text-secondary hover:text-error transition-colors">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+            `;
+            container.appendChild(newStop);
+        }
+
+        // Active State logic for service tabs
+        const serviceTabs = document.querySelectorAll('.flex.p-1.bg-surface-container-low button');
+        serviceTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                serviceTabs.forEach(t => {
+                    t.classList.remove('bg-white', 'shadow-sm', 'text-primary', 'font-bold');
+                    t.classList.add('text-secondary');
+                });
+                tab.classList.add('bg-white', 'shadow-sm', 'text-primary', 'font-bold');
+                tab.classList.remove('text-secondary');
+            });
+        });
+    </script>
+</body></html>
