@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+
+<html class="light" lang="th"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ระบบจัดการสมาชิก - บริการจองรถออนไลน์</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Noto+Sans+Thai:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Inter', 'Noto Sans Thai', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #e2e8ff;
+            border-radius: 10px;
+        }
+        /* Mobile height fix */
+        .h-screen-safe {
+            height: 100vh;
+            height: calc(var(--vh, 1vh) * 100);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-dim": "#d2d9f4",
+                        "surface-container-highest": "#dae2fd",
+                        "on-surface-variant": "#444653",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#eaedff",
+                        "primary-fixed": "#dde1ff",
+                        "primary-container": "#1e40af",
+                        "secondary": "#505f76",
+                        "inverse-surface": "#283044",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "surface": "#faf8ff",
+                        "secondary-container": "#d0e1fb",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "surface-container-low": "#f2f3ff",
+                        "on-primary-fixed": "#001453",
+                        "on-primary-fixed-variant": "#173bab",
+                        "on-background": "#131b2e",
+                        "on-tertiary-container": "#b9bcbe",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "tertiary-container": "#484c4e",
+                        "tertiary": "#323537",
+                        "on-primary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-primary-container": "#a8b8ff",
+                        "on-secondary-container": "#54647a",
+                        "on-surface": "#131b2e",
+                        "inverse-primary": "#b8c4ff",
+                        "surface-bright": "#faf8ff",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "surface-container-high": "#e2e7ff",
+                        "outline": "#757684",
+                        "surface-variant": "#dae2fd",
+                        "on-error": "#ffffff",
+                        "inverse-on-surface": "#eef0ff",
+                        "primary-fixed-dim": "#b8c4ff",
+                        "outline-variant": "#c4c5d5",
+                        "background": "#faf8ff",
+                        "on-secondary-fixed": "#0b1c30",
+                        "primary": "#00288e",
+                        "tertiary-fixed": "#e0e3e5",
+                        "surface-tint": "#3755c3",
+                        "on-tertiary-fixed": "#191c1e",
+                        "on-error-container": "#93000a"
+                    },
+                    "spacing": {
+                        "xs": "4px", "xl": "32px", "md": "16px", "margin-mobile": "16px",
+                        "max-width": "1280px", "sm": "8px", "2xl": "48px", "gutter": "24px",
+                        "base": "4px", "3xl": "64px", "margin-desktop": "auto", "lg": "24px"
+                    },
+                    "fontSize": {
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 w-full z-50 bg-surface shadow-sm h-16">
+<div class="flex justify-between items-center px-4 md:px-lg h-full w-full max-w-max-width mx-auto">
+<div class="flex items-center gap-4">
+<span class="text-headline-md font-bold text-primary">บริการจองรถออนไลน์</span>
+</div>
+<div class="hidden md:flex items-center gap-md">
+<nav class="flex gap-4">
+<a class="text-on-surface-variant hover:bg-surface-container-high transition-colors px-3 py-2 rounded-lg font-label-md" href="#">หน้าแรก</a>
+<a class="text-primary font-bold px-3 py-2 rounded-lg font-label-md" href="#">จัดการสมาชิก</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high transition-colors px-3 py-2 rounded-lg font-label-md" href="#">การจองทั้งหมด</a>
+</nav>
+<div class="h-8 w-[1px] bg-outline-variant mx-2"></div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary" data-icon="account_circle">account_circle</span>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="help">help</span>
+</div>
+</div>
+<!-- Mobile Menu Toggle -->
+<button class="md:hidden p-2 active:scale-95 transition-transform" id="side-nav-trigger">
+<span class="material-symbols-outlined text-primary" data-icon="menu">menu</span>
+</button>
+</div>
+</header>
+<!-- Side Navigation Shell (Desktop Sidebar Hidden on Mobile Default) -->
+<aside class="h-full w-72 fixed left-0 top-0 z-[60] bg-surface border-r border-outline-variant shadow-xl transform -translate-x-full lg:translate-x-0 transition-transform duration-300 ease-in-out flex flex-col p-md" id="sidebar">
+<div class="flex items-center gap-4 mb-xl mt-4">
+<div class="w-12 h-12 rounded-full overflow-hidden bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+</div>
+<div>
+<h3 class="font-headline-md text-[18px] text-primary">ยินดีต้อนรับ</h3>
+<p class="font-body-md text-label-sm text-on-surface-variant">ผู้ใช้งานทั่วไป</p>
+</div>
+</div>
+<nav class="flex-1 flex flex-col gap-2">
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="person">person</span>
+<span class="font-body-md">โปรไฟล์</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-primary-container text-on-primary-container font-bold rounded-lg shadow-sm" href="#">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="font-body-md">จัดการสมาชิก</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="history">history</span>
+<span class="font-body-md">ประวัติการจอง</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="info">info</span>
+<span class="font-body-md">วิธีการใช้งาน</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-low hover:translate-x-1 transition-all rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary" data-icon="settings">settings</span>
+<span class="font-body-md">ตั้งค่าระบบ</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant pt-md">
+<button class="flex items-center gap-3 px-4 py-3 w-full text-error hover:bg-error-container/20 rounded-lg transition-colors">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span class="font-body-md">ออกจากระบบ</span>
+</button>
+</div>
+</aside>
+<!-- Overlay for Sidebar -->
+<div class="fixed inset-0 bg-black/50 z-50 hidden transition-opacity lg:hidden" id="sidebar-overlay"></div>
+<!-- Main Content Area -->
+<main class="pt-16 lg:pl-72 min-h-screen">
+<div class="max-w-max-width mx-auto p-4 md:p-lg space-y-lg">
+<!-- Page Header & Search -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-md mb-xl">
+<div>
+<h1 class="font-headline-lg text-primary mb-2">จัดการสมาชิก</h1>
+<p class="text-on-surface-variant font-body-md">ตรวจสอบรายชื่อสมาชิกและประวัติการทำรายการทั้งหมด</p>
+</div>
+<div class="relative max-w-md w-full">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full pl-12 pr-4 py-3 rounded-xl border border-outline-variant bg-surface-container focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-md outline-none" placeholder="ค้นหาชื่อ หรือเบอร์โทรศัพท์..." type="text"/>
+</div>
+</div>
+<!-- Dashboard Summary Cards (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md lg:gap-lg mb-xl">
+<div class="bg-surface shadow-sm rounded-xl p-6 border border-outline-variant hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined" data-icon="group">group</span>
+</div>
+<span class="text-xs font-bold text-on-surface-variant bg-surface-variant px-2 py-1 rounded-full">+12% เดือนนี้</span>
+</div>
+<p class="text-on-surface-variant font-label-md mb-1">สมาชิกทั้งหมด</p>
+<h4 class="text-headline-md font-bold text-primary">1,284 คน</h4>
+</div>
+<div class="bg-surface shadow-sm rounded-xl p-6 border border-outline-variant hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-4">
+<div class="w-12 h-12 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" data-icon="calendar_month">calendar_month</span>
+</div>
+<span class="text-xs font-bold text-primary bg-primary-fixed px-2 py-1 rounded-full">+5% วันนี้</span>
+</div>
+<p class="text-on-surface-variant font-label-md mb-1">การจองในเดือนนี้</p>
+<h4 class="text-headline-md font-bold text-primary">458 รายการ</h4>
+</div>
+<div class="bg-primary shadow-lg rounded-xl p-6 text-on-primary hover:scale-[1.02] transition-transform cursor-pointer relative overflow-hidden group">
+<!-- Subtle background decoration -->
+<div class="absolute -right-8 -top-8 w-32 h-32 bg-on-primary/10 rounded-full group-hover:scale-150 transition-transform duration-700"></div>
+<div class="flex items-center justify-between mb-4 relative z-10">
+<div class="w-12 h-12 rounded-full bg-on-primary/20 flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="notifications_active">notifications_active</span>
+</div>
+<span class="text-xs font-bold text-on-primary bg-on-primary/10 border border-on-primary/20 px-2 py-1 rounded-full">เปิดใช้งานแล้ว</span>
+</div>
+<p class="text-on-primary/80 font-label-md mb-1">Line OA Status</p>
+<h4 class="text-headline-md font-bold">API Connected</h4>
+</div>
+</div>
+<!-- Main Interactive Section: Member List + Details -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-lg h-full">
+<!-- Member List Panel -->
+<div class="xl:col-span-8 bg-surface rounded-2xl border border-outline-variant shadow-sm overflow-hidden flex flex-col h-full min-h-[600px]">
+<div class="p-6 border-b border-outline-variant flex justify-between items-center">
+<h2 class="font-headline-md text-primary">รายชื่อสมาชิก</h2>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg hover:bg-surface-container transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="filter_list">filter_list</span>
+</button>
+<button class="p-2 rounded-lg hover:bg-surface-container transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead class="sticky top-0 bg-surface border-b border-outline-variant z-10">
+<tr>
+<th class="px-6 py-4 font-label-sm text-on-surface-variant uppercase tracking-wider">สมาชิก</th>
+<th class="px-6 py-4 font-label-sm text-on-surface-variant uppercase tracking-wider">เบอร์โทรศัพท์</th>
+<th class="px-6 py-4 font-label-sm text-on-surface-variant uppercase tracking-wider text-center">การจองทั้งหมด</th>
+<th class="px-6 py-4 font-label-sm text-on-surface-variant uppercase tracking-wider text-center">สถานะล่าสุด</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/50">
+<!-- Member Row 1 -->
+<tr class="hover:bg-surface-container-low cursor-pointer transition-colors group member-row active" data-member-id="1">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold">สม</div>
+<div>
+<div class="font-label-md text-on-surface group-hover:text-primary transition-colors">สมชาย เข็มกลัด</div>
+<div class="text-xs text-on-surface-variant">somchai.k@email.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md text-on-surface-variant">081-234-5678</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center justify-center px-3 py-1 bg-primary-container/10 text-primary rounded-full font-bold text-sm">24 ครั้ง</span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded-full">ยืนยันแล้ว</span>
+</td>
+</tr>
+<!-- Member Row 2 -->
+<tr class="hover:bg-surface-container-low cursor-pointer transition-colors group member-row" data-member-id="2">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold">วน</div>
+<div>
+<div class="font-label-md text-on-surface group-hover:text-primary transition-colors">วนิดา แสงทอง</div>
+<div class="text-xs text-on-surface-variant">wanida.s@email.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md text-on-surface-variant">089-999-8888</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center justify-center px-3 py-1 bg-primary-container/10 text-primary rounded-full font-bold text-sm">15 ครั้ง</span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="text-xs font-bold text-blue-600 bg-blue-100 px-2 py-1 rounded-full">กำลังประมวลผล</span>
+</td>
+</tr>
+<!-- Member Row 3 -->
+<tr class="hover:bg-surface-container-low cursor-pointer transition-colors group member-row" data-member-id="3">
+<td class="px-6 py-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-dim text-on-surface-variant flex items-center justify-center font-bold">กิต</div>
+<div>
+<div class="font-label-md text-on-surface group-hover:text-primary transition-colors">กิตติพงษ์ สุขใจ</div>
+<div class="text-xs text-on-surface-variant">kitti.s@email.com</div>
+</div>
+</div>
+</td>
+<td class="px-6 py-4 font-body-md text-on-surface-variant">085-444-3322</td>
+<td class="px-6 py-4 text-center">
+<span class="inline-flex items-center justify-center px-3 py-1 bg-primary-container/10 text-primary rounded-full font-bold text-sm">8 ครั้ง</span>
+</td>
+<td class="px-6 py-4 text-center">
+<span class="text-xs font-bold text-gray-600 bg-gray-100 px-2 py-1 rounded-full">ยกเลิกแล้ว</span>
+</td>
+</tr>
+<!-- Repeated rows for scroll demonstration -->
+<tr class="hover:bg-surface-container-low cursor-pointer transition-colors group member-row" data-member-id="4">
+<td class="px-6 py-4"><div class="flex items-center gap-4"><div class="w-10 h-10 rounded-full bg-secondary-container text-on-secondary-container flex items-center justify-center font-bold">รต</div><div><div class="font-label-md text-on-surface group-hover:text-primary">รัตนา เพลินจิต</div><div class="text-xs text-on-surface-variant">rattana.p@email.com</div></div></div></td>
+<td class="px-6 py-4 font-body-md text-on-surface-variant">082-111-2233</td>
+<td class="px-6 py-4 text-center"><span class="inline-flex items-center justify-center px-3 py-1 bg-primary-container/10 text-primary rounded-full font-bold text-sm">5 ครั้ง</span></td>
+<td class="px-6 py-4 text-center"><span class="text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded-full">ยืนยันแล้ว</span></td>
+</tr>
+<tr class="hover:bg-surface-container-low cursor-pointer transition-colors group member-row" data-member-id="5">
+<td class="px-6 py-4"><div class="flex items-center gap-4"><div class="w-10 h-10 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold">อธ</div><div><div class="font-label-md text-on-surface group-hover:text-primary">อธิวัฒน์ ดีใจ</div><div class="text-xs text-on-surface-variant">athiwat.d@email.com</div></div></div></td>
+<td class="px-6 py-4 font-body-md text-on-surface-variant">086-777-5544</td>
+<td class="px-6 py-4 text-center"><span class="inline-flex items-center justify-center px-3 py-1 bg-primary-container/10 text-primary rounded-full font-bold text-sm">31 ครั้ง</span></td>
+<td class="px-6 py-4 text-center"><span class="text-xs font-bold text-green-600 bg-green-100 px-2 py-1 rounded-full">ยืนยันแล้ว</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Summary Details Panel -->
+<div class="xl:col-span-4 space-y-lg">
+<!-- Member Summary Card -->
+<div class="bg-surface rounded-2xl border border-outline-variant shadow-lg p-6 flex flex-col space-y-md animate-in fade-in slide-in-from-right-4 duration-500" id="member-summary">
+<div class="flex justify-between items-start">
+<h3 class="font-headline-md text-primary">สรุปรายละเอียด</h3>
+<button class="p-2 rounded-lg hover:bg-surface-container transition-colors text-primary">
+<span class="material-symbols-outlined" data-icon="edit">edit</span>
+</button>
+</div>
+<div class="flex flex-col items-center py-6 border-b border-outline-variant">
+<div class="w-24 h-24 rounded-full border-4 border-primary-container p-1 mb-4">
+<img class="w-full h-full object-cover rounded-full" data-alt="A professional studio portrait of a Thai man in business casual attire, smiling warmly against a clean minimalist light grey background. High-key lighting, modern corporate photography style, crisp details, soft shadows." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAXAfafmEDmCMH8ltDQozTFCR9Aws8iqd7FvjebhhQu7_7Tyhwj76j-L-ZVeiNt60FuBSTLusSbKNRg6O-C7MFB7iiJAPAmVnC_NSgob97ff8mzfwtAH1EXhJ1wwZqUzGlmGK1T37FfKNDpjcZc0Wu3gYgii12sCzA66PsvH47Y17Art4rG5X-y1muifo3wzUEd3hAKjVwNx7__bPW9jauio1FrnTgIqYEIF7dvE78yQhdqSzbNg8fF"/>
+</div>
+<h4 class="font-headline-md text-[20px]" id="detail-name">สมชาย เข็มกลัด</h4>
+<p class="text-on-surface-variant font-body-md" id="detail-phone">081-234-5678</p>
+<div class="mt-4 flex gap-2">
+<span class="px-3 py-1 bg-primary-container/10 text-primary border border-primary-container/20 rounded-full font-label-sm">VIP Member</span>
+<span class="px-3 py-1 bg-surface-container text-on-surface-variant rounded-full font-label-sm">สมาชิกมาแล้ว 2 ปี</span>
+</div>
+</div>
+<div class="space-y-4">
+<h5 class="font-label-md text-on-surface-variant uppercase tracking-wider">ประวัติการจองล่าสุด</h5>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-xl border border-outline-variant/30">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="directions_car">directions_car</span>
+<div>
+<p class="font-label-md text-on-surface">Toyota Camry (Premium)</p>
+<p class="text-[10px] text-on-surface-variant">12 ก.ย. 2023 • 14:00 น.</p>
+</div>
+</div>
+<span class="text-xs font-bold text-green-600">สำเร็จ</span>
+</div>
+<div class="flex items-center justify-between p-3 bg-surface-container-low rounded-xl border border-outline-variant/30">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary" data-icon="directions_car">directions_car</span>
+<div>
+<p class="font-label-md text-on-surface">Honda Accord (Luxe)</p>
+<p class="text-[10px] text-on-surface-variant">28 ส.ค. 2023 • 09:30 น.</p>
+</div>
+</div>
+<span class="text-xs font-bold text-green-600">สำเร็จ</span>
+</div>
+</div>
+<button class="w-full py-3 text-primary font-bold font-label-md hover:bg-primary-container/5 rounded-xl transition-colors border border-primary-container/20">
+                                ดูประวัติทั้งหมด
+                            </button>
+</div>
+</div>
+<!-- API Notification Settings Section -->
+<div class="bg-surface rounded-2xl border border-outline-variant shadow-sm p-6 space-y-md">
+<div class="flex items-center gap-3 text-primary">
+<span class="material-symbols-outlined" data-icon="api">api</span>
+<h3 class="font-headline-md text-[20px]">ตั้งค่า Line OA API</h3>
+</div>
+<p class="text-on-surface-variant font-label-md">เชื่อมต่อระบบแจ้งเตือนผ่าน Line Messaging API สำหรับสมาชิก</p>
+<div class="space-y-4 pt-2">
+<div class="space-y-1">
+<label class="text-label-md font-bold text-on-surface">Line Access Token</label>
+<div class="relative">
+<input class="w-full pl-4 pr-10 py-3 rounded-xl border border-outline-variant bg-surface-container-low focus:ring-2 focus:ring-primary focus:border-primary transition-all font-mono text-sm outline-none" type="password" value="****************************************"/>
+<button class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant hover:text-primary">
+<span class="material-symbols-outlined text-[20px]" data-icon="visibility">visibility</span>
+</button>
+</div>
+</div>
+<div class="flex items-center justify-between py-2">
+<div class="flex flex-col">
+<span class="font-label-md font-bold text-on-surface">ส่งข้อความอัตโนมัติ</span>
+<span class="text-[10px] text-on-surface-variant">แจ้งเตือนเมื่อจองสำเร็จ</span>
+</div>
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-dim peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+<button class="w-full py-3 bg-primary text-on-primary font-bold rounded-xl shadow-md active:scale-95 transition-transform">
+                                บันทึกการตั้งค่า API
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Navigation for Mobile -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-20 px-4 pb-safe bg-surface shadow-[0_-4px_12px_rgba(15,23,42,0.05)] rounded-t-xl z-50">
+<a class="flex flex-col items-center justify-center text-secondary hover:bg-secondary-container/50 transition-all p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-label-sm">หน้าแรก</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary font-bold p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="group" style="font-variation-settings: 'FILL' 1;">group</span>
+<span class="font-label-sm">สมาชิก</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary hover:bg-secondary-container/50 transition-all p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="event_note">event_note</span>
+<span class="font-label-sm">การจอง</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary hover:bg-secondary-container/50 transition-all p-2 rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="support_agent">support_agent</span>
+<span class="font-label-sm">ติดต่อเรา</span>
+</a>
+</nav>
+<script>
+        // Simple View Interactivity
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        const trigger = document.getElementById('side-nav-trigger');
+
+        function toggleSidebar() {
+            const isHidden = sidebar.classList.contains('-translate-x-full');
+            if (isHidden) {
+                sidebar.classList.remove('-translate-x-full');
+                overlay.classList.remove('hidden');
+            } else {
+                sidebar.classList.add('-translate-x-full');
+                overlay.classList.add('hidden');
+            }
+        }
+
+        if (trigger) trigger.addEventListener('click', toggleSidebar);
+        if (overlay) overlay.addEventListener('click', toggleSidebar);
+
+        // Member Selection Logic
+        const memberRows = document.querySelectorAll('.member-row');
+        const detailName = document.getElementById('detail-name');
+        const detailPhone = document.getElementById('detail-phone');
+        const summaryPanel = document.getElementById('member-summary');
+
+        memberRows.forEach(row => {
+            row.addEventListener('click', () => {
+                // Remove active styling from others
+                memberRows.forEach(r => {
+                    r.classList.remove('bg-surface-container-low', 'border-l-4', 'border-primary');
+                });
+                
+                // Add active styling
+                row.classList.add('bg-surface-container-low', 'border-l-4', 'border-primary');
+                
+                // Update detail text based on selected row
+                const name = row.querySelector('.font-label-md').innerText;
+                const phone = row.querySelector('td:nth-child(2)').innerText;
+                
+                // Animation for switching
+                summaryPanel.classList.remove('fade-in', 'slide-in-from-right-4');
+                void summaryPanel.offsetWidth; // trigger reflow
+                summaryPanel.classList.add('fade-in', 'slide-in-from-right-4');
+                
+                detailName.innerText = name;
+                detailPhone.innerText = phone;
+            });
+        });
+
+        // Search Bar Mock Interaction
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            memberRows.forEach(row => {
+                const text = row.innerText.toLowerCase();
+                row.style.display = text.includes(term) ? '' : 'none';
+            });
+        });
+
+        // Set safe height for mobile
+        function setVh() {
+            let vh = window.innerHeight * 0.01;
+            document.documentElement.style.setProperty('--vh', `${vh}px`);
+        }
+        window.addEventListener('resize', setVh);
+        setVh();
+    </script>
+</body></html>
