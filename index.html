@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html lang="th"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>บริการจองรถออนไลน์ - พรีเมียมและสะดวกสบาย</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#b9bcbe",
+                        "on-background": "#131b2e",
+                        "outline-variant": "#c4c5d5",
+                        "tertiary-fixed": "#e0e3e5",
+                        "on-primary-fixed-variant": "#173bab",
+                        "primary-fixed": "#dde1ff",
+                        "on-secondary-fixed": "#0b1c30",
+                        "tertiary-container": "#484c4e",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "surface-container-low": "#f2f3ff",
+                        "on-tertiary-fixed": "#191c1e",
+                        "tertiary": "#323537",
+                        "error": "#ba1a1a",
+                        "background": "#faf8ff",
+                        "on-primary-fixed": "#001453",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed-dim": "#c4c7c9",
+                        "on-primary-container": "#a8b8ff",
+                        "primary-container": "#1e40af",
+                        "primary": "#00288e",
+                        "inverse-primary": "#b8c4ff",
+                        "outline": "#757684",
+                        "surface-container-highest": "#dae2fd",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "secondary": "#505f76",
+                        "on-secondary-container": "#54647a",
+                        "on-surface-variant": "#444653",
+                        "secondary-fixed": "#d3e4fe",
+                        "surface-dim": "#d2d9f4",
+                        "secondary-container": "#d0e1fb",
+                        "primary-fixed-dim": "#b8c4ff",
+                        "surface-variant": "#dae2fd",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#444749",
+                        "surface-tint": "#3755c3",
+                        "on-primary": "#ffffff",
+                        "inverse-on-surface": "#eef0ff",
+                        "inverse-surface": "#283044",
+                        "surface-bright": "#faf8ff",
+                        "on-tertiary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-surface": "#131b2e",
+                        "surface-container": "#eaedff",
+                        "surface": "#faf8ff",
+                        "surface-container-high": "#e2e7ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "sm": "8px",
+                        "3xl": "64px",
+                        "xs": "4px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "xl": "32px",
+                        "base": "4px",
+                        "max-width": "1280px",
+                        "2xl": "48px",
+                        "margin-desktop": "auto",
+                        "margin-mobile": "16px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "headline-xl": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg-mobile": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["14px", {"lineHeight": "20px", "fontWeight": "500"}],
+                        "headline-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .hero-gradient {
+            background: linear-gradient(0deg, rgba(19, 27, 46, 0.8) 0%, rgba(19, 27, 46, 0.2) 50%, rgba(19, 27, 46, 0) 100%);
+        }
+        .bento-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .bento-card:hover {
+            transform: translateY(-4px);
+        }
+        body {
+            background-color: #faf8ff;
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-background m-0 p-0 overflow-x-hidden">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface shadow-sm h-16">
+<div class="flex justify-between items-center px-4 md:px-lg h-full max-w-max-width mx-auto">
+<div class="flex items-center gap-2">
+<span class="text-headline-md font-headline-md font-bold text-primary">บริการจองรถออนไลน์</span>
+</div>
+<div class="hidden md:flex items-center gap-xl">
+<a class="text-primary font-bold transition-colors" href="#">หน้าแรก</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high transition-colors px-3 py-2 rounded-lg" href="#">จองรถ</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high transition-colors px-3 py-2 rounded-lg" href="#">การจองของฉัน</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high transition-colors px-3 py-2 rounded-lg" href="#">ติดต่อเรา</a>
+</div>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-2 rounded-full transition-colors active:scale-95">help</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:bg-surface-container-high p-2 rounded-full transition-colors active:scale-95">account_circle</button>
+</div>
+</div>
+</nav>
+<main class="pt-16 pb-24 md:pb-0">
+<!-- Hero Section -->
+<section class="relative w-full h-[85vh] md:h-[90vh] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="พรีเมียมคาร์เซอร์วิส" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB0bkD7elMchnpCOTmRPRGXXpG9qhNzPCVjtQyFgeSAre1EtKvrlwd2-BtupvxrcamSvgAGPNeTk0sP0wWw6EANhjvbJveEuxinh2hOWDmXirvESWabE5CAMqZq1_fhhWyYHAF1HhxGX5Gbmj6nkqVG7Soanfq9NL7uHG0UX2y6f3RBul3ouwO95ui4BN_mtvv44Q6Q2u797ApV4KOo4_QNSttoiuyn4hA3IG6YSGCsuqAeCBteU-Z0"/>
+<div class="absolute inset-0 hero-gradient"></div>
+</div>
+<div class="relative z-10 w-full max-w-max-width mx-auto px-4 md:px-lg">
+<div class="max-w-2xl animate-fade-in-up">
+<span class="inline-block px-4 py-2 bg-primary/20 backdrop-blur-md text-white rounded-full font-label-md text-label-md mb-md uppercase tracking-wider">Professional Chauffeur Service</span>
+<h1 class="font-headline-xl text-white text-[40px] md:text-[64px] leading-tight mb-lg">บริการจองรถระดับพรีเมียม ที่ตอบโจทย์ทุกการเดินทาง</h1>
+<p class="font-body-lg text-white/90 text-body-lg mb-xl max-w-lg">สัมผัสประสบการณ์การเดินทางที่เหนือระดับด้วยรถยนต์รุ่นท็อปและพนักงานขับรถมืออาชีพ ให้ทุกก้าวของคุณเป็นเรื่องง่ายและปลอดภัย</p>
+<div class="flex flex-col sm:flex-row gap-md">
+<button class="bg-primary text-white px-xl py-lg rounded-lg font-headline-md text-headline-md shadow-lg active:scale-95 transition-transform flex items-center justify-center gap-2">
+<span>จองรถเลย</span>
+<span class="material-symbols-outlined">arrow_forward</span>
+</button>
+<button class="bg-white/10 backdrop-blur-md border border-white/30 text-white px-xl py-lg rounded-lg font-headline-md text-headline-md hover:bg-white/20 transition-colors flex items-center justify-center gap-2">
+<span>ดูรายการรถยนต์</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Search Bar (Sticky-like) -->
+<div class="relative -mt-16 z-20 max-w-max-width mx-auto px-4 md:px-lg mb-3xl">
+<div class="bg-white rounded-xl shadow-lg p-lg grid grid-cols-1 md:grid-cols-4 gap-lg">
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-[20px]">location_on</span>สถานที่รับ</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary" placeholder="ค้นหาสถานที่..." type="text"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-[20px]">event</span>วันที่จอง</label>
+<input class="w-full bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary" type="date"/>
+</div>
+<div class="flex flex-col gap-xs">
+<label class="font-label-md text-on-surface-variant flex items-center gap-2"><span class="material-symbols-outlined text-[20px]">directions_car</span>ประเภทรถ</label>
+<select class="w-full bg-surface-container-low border-none rounded-lg focus:ring-2 focus:ring-primary">
+<option>Luxury Sedan</option>
+<option>Premium MPV</option>
+<option>Executive Van</option>
+</select>
+</div>
+<div class="flex items-end">
+<button class="w-full bg-primary text-white h-12 rounded-lg font-bold flex items-center justify-center gap-2 active:scale-95 transition-transform">
+<span class="material-symbols-outlined">search</span>
+                        ค้นหารถว่าง
+                    </button>
+</div>
+</div>
+</div>
+<!-- Features Bento Grid -->
+<section class="max-w-max-width mx-auto px-4 md:px-lg py-3xl">
+<div class="text-center mb-2xl">
+<h2 class="font-headline-lg text-headline-lg text-on-background mb-sm">ทำไมถึงต้องเลือกใช้บริการของเรา</h2>
+<p class="font-body-md text-on-surface-variant">ยกระดับมาตรฐานการเดินทางด้วยจุดเด่นที่เรามอบให้คุณ</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-lg auto-rows-[240px]">
+<!-- Bento Item 1 -->
+<div class="md:col-span-8 bg-surface-container shadow-sm border border-outline-variant rounded-xl p-xl flex flex-col justify-end relative overflow-hidden bento-card">
+<div class="absolute top-xl right-xl">
+<span class="material-symbols-outlined text-primary text-[48px]">verified_user</span>
+</div>
+<div class="relative z-10">
+<h3 class="font-headline-md text-headline-md mb-sm text-primary">ความปลอดภัยระดับสากล</h3>
+<p class="font-body-md text-on-surface-variant max-w-md">พนักงานขับรถทุกคนผ่านการตรวจสอบประวัติและอบรมมารยาทอย่างเข้มงวด พร้อมประกันภัยคุ้มครองทุกการเดินทาง</p>
+</div>
+</div>
+<!-- Bento Item 2 -->
+<div class="md:col-span-4 bg-primary text-white rounded-xl p-xl flex flex-col justify-between bento-card">
+<span class="material-symbols-outlined text-[48px]">schedule</span>
+<div>
+<h3 class="font-headline-md text-headline-md mb-sm">ตรงต่อเวลา 100%</h3>
+<p class="font-label-md opacity-80">เราให้ความสำคัญกับเวลาของคุณ พร้อมระบบ GPS ติดตามสถานะรถแบบเรียลไทม์</p>
+</div>
+</div>
+<!-- Bento Item 3 -->
+<div class="md:col-span-4 bg-secondary-container rounded-xl p-xl flex flex-col justify-between bento-card">
+<span class="material-symbols-outlined text-on-secondary-container text-[48px]">workspace_premium</span>
+<div>
+<h3 class="font-headline-md text-headline-md mb-sm text-on-secondary-container">รถยนต์หรูรุ่นใหม่</h3>
+<p class="font-label-md text-on-secondary-container/80">รถยนต์ทุกคันมีอายุการใช้งานไม่เกิน 3 ปี สะอาด สะดวกสบาย และได้รับการบำรุงรักษาอย่างดี</p>
+</div>
+</div>
+<!-- Bento Item 4 -->
+<div class="md:col-span-8 bg-surface border border-outline-variant rounded-xl p-xl flex items-center gap-xl bento-card">
+<div class="flex-1">
+<h3 class="font-headline-md text-headline-md mb-sm text-primary">จองง่ายภายใน 1 นาที</h3>
+<p class="font-body-md text-on-surface-variant">ระบบการจองที่ลื่นไหลผ่านทั้งเว็บไซต์และแอปพลิเคชัน ชำระเงินได้หลายช่องทางอย่างปลอดภัย</p>
+<div class="flex gap-md mt-lg">
+<span class="bg-surface-container-high px-3 py-1 rounded-full text-label-sm font-label-sm">Credit Card</span>
+<span class="bg-surface-container-high px-3 py-1 rounded-full text-label-sm font-label-sm">PromptPay</span>
+<span class="bg-surface-container-high px-3 py-1 rounded-full text-label-sm font-label-sm">E-Wallet</span>
+</div>
+</div>
+<div class="hidden md:block w-32 h-32 bg-primary/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[64px]">touch_app</span>
+</div>
+</div>
+</div>
+</section>
+<!-- CTA Section with Image -->
+<section class="w-full bg-inverse-surface text-inverse-on-surface py-3xl mt-3xl">
+<div class="max-w-max-width mx-auto px-4 md:px-lg grid md:grid-cols-2 gap-2xl items-center">
+<div>
+<h2 class="font-headline-lg text-headline-lg mb-lg">พร้อมสำหรับการเดินทางครั้งต่อไปของคุณหรือยัง?</h2>
+<p class="font-body-lg mb-2xl opacity-90">ดาวน์โหลดแอปพลิเคชันเพื่อรับสิทธิพิเศษและส่วนลดสำหรับการจองครั้งแรก</p>
+<div class="flex gap-lg">
+<button class="bg-white text-black px-xl py-md rounded-lg flex items-center gap-2 hover:bg-gray-200 transition-colors">
+<span class="material-symbols-outlined">file_download</span>
+<div class="text-left">
+<p class="text-[10px] leading-tight opacity-70">Download on the</p>
+<p class="font-bold leading-tight">App Store</p>
+</div>
+</button>
+<button class="bg-white text-black px-xl py-md rounded-lg flex items-center gap-2 hover:bg-gray-200 transition-colors">
+<span class="material-symbols-outlined">play_arrow</span>
+<div class="text-left">
+<p class="text-[10px] leading-tight opacity-70">Get it on</p>
+<p class="font-bold leading-tight">Google Play</p>
+</div>
+</button>
+</div>
+</div>
+<div class="relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden shadow-2xl">
+<img class="w-full h-full object-cover" data-alt="A close-up shot of a professional chauffeur opening the door of a pristine white luxury Mercedes van parked in front of a modern glass skyscraper. The warm golden hour light reflects off the polished car exterior and the building's facade. The image exudes a premium, high-end feel with sharp focus and cinematic composition, maintaining the brand's blue and white color palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBgXvEYizfpFav1pOUQCUx0rXdn_l4z-MUfkSHe-V8O6uriWvu7h84MPnFTJl4iXnJTtsEj57dHhqQROzalaGnFd8h7H7LpxtBmIegNonMlvj2WV_gQUI5R6PKLWWGVKCSARAtSEtPJ2APidRrExqbJKVtNLmOnwTjshJgo5Z0Xv2PHLFoFxSSsk-MiFhWLaGJa0zb_syalrHT69yUybb27dcBr7bKGcqDlQD_-0m5IJyRS6RwtcN_W"/>
+</div>
+</div>
+</section>
+<!-- Contact Section / Footer -->
+<footer class="bg-surface pt-3xl pb-10">
+<div class="max-w-max-width mx-auto px-4 md:px-lg">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-2xl mb-3xl">
+<div class="col-span-1 md:col-span-1">
+<h4 class="font-headline-md text-primary mb-lg">บริการจองรถออนไลน์</h4>
+<p class="font-body-md text-on-surface-variant">ผู้นำด้านบริการรถเช่าพร้อมคนขับระดับมืออาชีพ ที่เน้นความพึงพอใจของลูกค้าเป็นอันดับหนึ่ง</p>
+</div>
+<div>
+<h5 class="font-label-md text-on-background mb-lg uppercase tracking-widest">การเดินทาง</h5>
+<ul class="flex flex-col gap-md text-on-surface-variant font-body-md">
+<li><a class="hover:text-primary transition-colors" href="#">ประเภทรถยนต์</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">บริการส่งสนามบิน</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">เหมาวันท่องเที่ยว</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">บริการสำหรับองค์กร</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-md text-on-background mb-lg uppercase tracking-widest">ช่วยเหลือ</h5>
+<ul class="flex flex-col gap-md text-on-surface-variant font-body-md">
+<li><a class="hover:text-primary transition-colors" href="#">คำถามที่พบบ่อย</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">นโยบายความเป็นส่วนตัว</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">ข้อตกลงและเงื่อนไข</a></li>
+<li><a class="hover:text-primary transition-colors" href="#">นโยบายการยกเลิก</a></li>
+</ul>
+</div>
+<div>
+<h5 class="font-label-md text-on-background mb-lg uppercase tracking-widest">ติดต่อด่วน</h5>
+<div class="flex flex-col gap-md">
+<a class="flex items-center gap-md p-md bg-surface-container-high rounded-xl hover:bg-primary-container/20 transition-colors" href="#">
+<div class="w-10 h-10 bg-[#06C755] rounded-full flex items-center justify-center text-white">
+<span class="font-bold">L</span>
+</div>
+<span class="font-label-md text-on-surface">Line @PremiumCar</span>
+</a>
+<a class="flex items-center gap-md p-md bg-surface-container-high rounded-xl hover:bg-primary-container/20 transition-colors" href="#">
+<div class="w-10 h-10 bg-[#25D366] rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[20px]">chat</span>
+</div>
+<span class="font-label-md text-on-surface">WhatsApp</span>
+</a>
+<a class="flex items-center gap-md p-md bg-surface-container-high rounded-xl hover:bg-primary-container/20 transition-colors" href="#">
+<div class="w-10 h-10 bg-[#09B83E] rounded-full flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[20px]">qr_code</span>
+</div>
+<span class="font-label-md text-on-surface">WeChat</span>
+</a>
+</div>
+</div>
+</div>
+<div class="pt-lg border-t border-outline-variant flex flex-col md:row justify-between items-center gap-lg">
+<p class="font-label-sm text-on-surface-variant">© 2024 บริการจองรถออนไลน์. All rights reserved.</p>
+<div class="flex gap-xl">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">public</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">qr_code_2</span></a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+</div>
+</div>
+</div>
+</footer>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center h-20 px-4 pb-safe bg-surface shadow-[0_-4px_12px_rgba(15,23,42,0.05)] z-50 rounded-t-xl">
+<button class="flex flex-col items-center justify-center text-primary font-bold active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="text-label-sm font-label-sm mt-1">หน้าแรก</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined">directions_car</span>
+<span class="text-label-sm font-label-sm mt-1">จองรถ</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined">event_note</span>
+<span class="text-label-sm font-label-sm mt-1">การจอง</span>
+</button>
+<button class="flex flex-col items-center justify-center text-secondary active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="text-label-sm font-label-sm mt-1">ติดต่อเรา</span>
+</button>
+</nav>
+<script>
+        // Micro-interactions and subtle effects
+        document.querySelectorAll('button, a').forEach(elem => {
+            elem.addEventListener('mousedown', () => {
+                elem.style.transform = 'scale(0.95)';
+            });
+            elem.addEventListener('mouseup', () => {
+                elem.style.transform = 'scale(1)';
+            });
+            elem.addEventListener('mouseleave', () => {
+                elem.style.transform = 'scale(1)';
+            });
+        });
+
+        // Simple Fade in animation for hero elements
+        const observerOptions = {
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.bento-card').forEach(card => {
+            observer.observe(card);
+        });
+    </script>
+</body></html>
